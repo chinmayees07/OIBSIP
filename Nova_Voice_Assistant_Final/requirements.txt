@@ -1,0 +1,12 @@
+# Core Voice & Audio
+SpeechRecognition==3.10.4
+pyttsx3==2.90
+PyAudio==0.2.14
+
+# Web & Knowledge Utilities (Free & Open Source)
+requests==2.31.0
+wikipedia==1.4.0
+psutil==5.9.8
+
+# Optional AI / LLM & Environment Management
+python-dotenv==1.0.1
