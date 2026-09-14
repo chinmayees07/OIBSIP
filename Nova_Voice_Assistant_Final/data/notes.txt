@@ -1,3 +1,0 @@
-[2026-08-26 10:00 AM] Welcome to your Nova Voice Assistant project.
-[2026-08-26 11:30 AM] Review voice assistant architecture and prepare presentation slides.
-[2026-09-02 10:12 AM] Buy groceries at 6pm
