@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BMI Calculator</title><link rel="stylesheet" href="style.css">
+</head>
+<body><main class="card">
+<div class="tag">HEALTH TOOL</div><h1>BMI Calculator</h1><p class="sub">Calculate your Body Mass Index instantly.</p>
+<form id="form">
+<label>Age<input id="age" type="number" min="1" max="120" placeholder="Enter age" required></label>
+<label>Weight (kg)<input id="weight" type="number" min="1" step="0.1" placeholder="Enter weight" required></label>
+<label>Height (cm)<input id="height" type="number" min="30" step="0.1" placeholder="Enter height" required></label>
+<button type="submit">Calculate BMI <span>→</span></button>
+</form><div id="error"></div>
+<section id="result" class="result hidden"><small>YOUR BMI</small><strong id="value">--</strong><h2 id="category">--</h2><p id="explanation"></p></section>
+<footer>BMI is a general screening estimate, not a medical diagnosis.</footer>
+</main><script src="app.js"></script></body></html>
