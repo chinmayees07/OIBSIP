@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b1220">
+  <title>VaultKey — Secure Password Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark"><span></span><span></span><span></span></div>
+      <div><strong>VaultKey</strong><small>Security Studio</small></div>
+    </div>
+
+    <div class="workspace">
+      <div class="workspace-label">WORKSPACE</div>
+      <button class="workspace-card">
+        <div class="workspace-icon">V</div>
+        <div><b>Personal Vault</b><small>Local session</small></div>
+        <span>⌄</span>
+      </button>
+    </div>
+
+    <nav>
+      <div class="nav-label">TOOLS</div>
+      <button class="nav-item active" data-view="dashboard"><span>⌂</span>Overview</button>
+      <button class="nav-item" data-view="generator"><span>✦</span>Password Studio</button>
+      <button class="nav-item" data-view="passphrase"><span>◈</span>Passphrase</button>
+      <button class="nav-item" data-view="analyzer"><span>◌</span>Security Analyzer</button>
+      <button class="nav-item" data-view="history"><span>↺</span>Session History</button>
+      <div class="nav-label lower">SYSTEM</div>
+      <button class="nav-item" data-view="settings"><span>⚙</span>Settings</button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="secure-badge"><i></i><span><b>Local-first</b><small>No password storage</small></span></div>
+      <button id="themeBtn" class="icon-btn" aria-label="Toggle theme">☾</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">PERSONAL SECURITY WORKSPACE</div>
+        <h1 id="pageTitle">Overview</h1>
+      </div>
+      <div class="top-actions">
+        <div id="apiStatus" class="status-pill checking"><i></i><span>Checking security engine…</span></div>
+        <button class="avatar">VK</button>
+      </div>
+    </header>
+
+    <section id="dashboard" class="view active">
+      <div class="hero">
+        <div class="hero-copy">
+          <div class="hero-kicker">SECURE BY DESIGN</div>
+          <h2>Build stronger credentials<br><em>without the guesswork.</em></h2>
+          <p>Generate, inspect and manage temporary passwords with a clean local-first workflow powered by Python's secure random engine.</p>
+          <div class="hero-actions">
+            <button class="primary" data-go="generator">Create password <span>→</span></button>
+            <button class="secondary" data-go="analyzer">Analyze a password</button>
+          </div>
+        </div>
+        <div class="hero-orbit" aria-hidden="true">
+          <div class="orbit o1"></div><div class="orbit o2"></div><div class="orbit o3"></div>
+          <div class="core"><span>✦</span><small>SECURE</small></div>
+        </div>
+      </div>
+
+      <div class="metrics">
+        <article class="metric-card">
+          <span class="metric-icon blue">✦</span><div><small>Passwords created</small><strong id="statGenerated">0</strong></div>
+          <b class="metric-note">This session</b>
+        </article>
+        <article class="metric-card">
+          <span class="metric-icon green">✓</span><div><small>Security posture</small><strong id="statScore">100%</strong></div>
+          <b class="metric-note">Local analysis</b>
+        </article>
+        <article class="metric-card">
+          <span class="metric-icon amber">↺</span><div><small>Session history</small><strong id="statHistory">0 / 5</strong></div>
+          <b class="metric-note">Temporary only</b>
+        </article>
+      </div>
+
+      <div class="section-heading"><div><small>QUICK ACTIONS</small><h3>Choose your workflow</h3></div></div>
+      <div class="quick-grid">
+        <button class="quick-card" data-go="generator"><div class="q-icon">✦</div><div><b>Password Studio</b><span>Fine-tune length, character sets and exclusions.</span></div><strong>→</strong></button>
+        <button class="quick-card" data-go="passphrase"><div class="q-icon violet">◈</div><div><b>Passphrase</b><span>Create memorable multi-word credentials.</span></div><strong>→</strong></button>
+        <button class="quick-card" data-go="analyzer"><div class="q-icon green">◌</div><div><b>Security Analyzer</b><span>Check strength entirely in your browser.</span></div><strong>→</strong></button>
+      </div>
+    </section>
+
+    <section id="generator" class="view">
+      <div class="section-heading"><div><small>PASSWORD STUDIO</small><h3>Generate a secure password</h3><p>Use the Python security engine or a local browser fallback if the server is unavailable.</p></div></div>
+      <div class="studio-layout">
+        <div class="panel controls-panel">
+          <div class="panel-title"><span>Configuration</span><span class="tag">ADVANCED</span></div>
+          <label class="field-label">Password length <output id="lengthValue">20</output></label>
+          <input id="length" type="range" min="8" max="128" value="20">
+          <div class="range-hints"><span>8</span><span>128</span></div>
+
+          <div class="divider"></div>
+          <label class="field-label">Character sets</label>
+          <div class="checks">
+            <label class="check"><input id="upper" type="checkbox" checked><span class="box"></span><span>Uppercase <code>A–Z</code></span></label>
+            <label class="check"><input id="lower" type="checkbox" checked><span class="box"></span><span>Lowercase <code>a–z</code></span></label>
+            <label class="check"><input id="numbers" type="checkbox" checked><span class="box"></span><span>Numbers <code>0–9</code></span></label>
+            <label class="check"><input id="symbols" type="checkbox" checked><span class="box"></span><span>Symbols <code>!@#</code></span></label>
+          </div>
+
+          <div class="divider"></div>
+          <label class="check"><input id="ambiguous" type="checkbox" checked><span class="box"></span><span>Exclude ambiguous characters <code>0 O l 1</code></span></label>
+          <label class="check"><input id="noRepeat" type="checkbox"><span class="box"></span><span>Prevent repeated characters</span></label>
+          <label class="field-label compact">Custom exclusions <span>(optional)</span></label>
+          <input id="exclude" class="text-input" maxlength="32" placeholder="e.g. {}[]/\\">
+          <button id="generateBtn" class="primary full">Generate secure password <span>✦</span></button>
+        </div>
+
+        <div class="panel result-panel">
+          <div class="result-head"><div><span class="result-label">GENERATED CREDENTIAL</span><h4 id="resultTitle">Ready when you are</h4></div><div id="engineBadge" class="engine-badge">ENGINE READY</div></div>
+          <div class="password-box"><span id="passwordOutput">Click generate to create a password</span><button id="copyBtn" title="Copy">⧉</button></div>
+          <div class="strength-row"><span>Strength</span><div class="strength-track"><i id="strengthBar"></i></div><b id="strengthText">—</b></div>
+          <div class="rules">
+            <div><span id="ruleLength" class="rule">✓</span>Length meets minimum</div>
+            <div><span id="ruleTypes" class="rule">✓</span>Character diversity</div>
+            <div><span id="ruleUnique" class="rule">✓</span>Secure random generation</div>
+          </div>
+          <div class="tip"><b>Security note</b><span>Passwords are kept in session memory only. They are not written to a file or database.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="passphrase" class="view">
+      <div class="section-heading"><div><small>PASSPHRASE</small><h3>Memorable, still secure</h3><p>Generate a multi-word phrase with adjustable length and separators.</p></div></div>
+      <div class="panel passphrase-panel">
+        <div class="pp-control"><label>Words <output id="wordValue">5</output></label><input id="wordCount" type="range" min="3" max="10" value="5"></div>
+        <div class="pp-control"><label>Separator</label><select id="separator"><option value="-">Hyphen —</option><option value="_">Underscore _</option><option value=".">Dot .</option><option value=" ">Space</option></select></div>
+        <button id="passphraseBtn" class="primary">Generate passphrase →</button>
+      </div>
+      <div class="panel phrase-output"><span id="phraseOutput">Your passphrase will appear here</span><button id="copyPhrase">⧉ Copy</button></div>
+    </section>
+
+    <section id="analyzer" class="view">
+      <div class="section-heading"><div><small>SECURITY ANALYZER</small><h3>Inspect a password privately</h3><p>Analysis happens locally in your browser. Nothing is sent to the server.</p></div></div>
+      <div class="panel analyzer-panel">
+        <div class="analyze-input"><input id="analyzeInput" type="password" placeholder="Enter a password to analyze"><button id="analyzeBtn" class="primary">Analyze</button></div>
+        <div class="analysis-result"><div class="score-circle"><strong id="analyzeScore">0</strong><small>/100</small></div><div><h4 id="analyzeLevel">Waiting for input</h4><p id="analyzeDetails">Enter a password and select Analyze.</p></div></div>
+      </div>
+    </section>
+
+    <section id="history" class="view">
+      <div class="section-heading"><div><small>SESSION HISTORY</small><h3>Recent credentials</h3><p>Only the latest five are kept in memory and cleared when this page is closed.</p></div><button id="clearHistory" class="secondary">Clear session</button></div>
+      <div id="historyList" class="history-list"><div class="empty">No passwords generated in this session yet.</div></div>
+    </section>
+
+    <section id="settings" class="view">
+      <div class="section-heading"><div><small>SETTINGS</small><h3>Workspace preferences</h3></div></div>
+      <div class="panel settings-panel">
+        <div class="setting"><div><b>Automatic copy</b><span>Copy each generated password to the clipboard.</span></div><label class="switch"><input id="autoCopy" type="checkbox"><span></span></label></div>
+        <div class="setting"><div><b>Session-only history</b><span>Never persist generated credentials to disk.</span></div><label class="switch"><input id="sessionOnly" type="checkbox" checked disabled><span></span></label></div>
+        <div class="setting"><div><b>Compact interface</b><span>Use tighter spacing across the workspace.</span></div><label class="switch"><input id="compact" type="checkbox"><span></span></label></div>
+      </div>
+    </section>
+
+    <footer>VaultKey • Local-first password studio • No credential persistence</footer>
+  </main>
+</div>
+<div id="toast" class="toast"></div>
+<script src="script.js"></script>
+</body>
+</html>
